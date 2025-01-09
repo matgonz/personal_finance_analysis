@@ -1,5 +1,5 @@
 ofxparse==0.21
-pandas==2.2.2
+pandas==2.2.3
 
 langchain_core==0.2.39
 langchain_groq==0.1.9
