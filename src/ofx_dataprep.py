@@ -1,4 +1,5 @@
 import os
+from typing import List
 from ofxparse import OfxParser
 import pandas as pd
 
@@ -17,11 +18,9 @@ class OfxDataPrep:
         """
 
         _arr_transactions = []
-        _files = os.listdir(data_path)
+        _files = self.list_ofx_files(data_path=data_path)
         for file in _files:
-            file_path = f'{data_path}/{file}'
-            
-            with open(file_path, encoding='ISO-8859-1') as ofx_file:
+            with open(file, 'r', encoding='ISO-8859-1') as ofx_file:
                 _ofx = OfxParser.parse(ofx_file)
                 
                 account_data = self.get_account_data(_ofx.account)
@@ -34,6 +33,18 @@ class OfxDataPrep:
         transactions_dataframe = pd.concat(_arr_transactions)
 
         return transactions_dataframe
+    
+    def list_ofx_files(self, data_path: str) -> List[str]:
+        """
+        Lists all OFX files in a specified directory.
+        Args:
+            data_path (str): The path to the directory containing OFX files.
+        Returns:
+            List[str]: A list of file paths for all OFX files in the directory.
+        """
+        return [os.path.join(data_path, file) \
+                for file in os.listdir(data_path) \
+                if file.endswith('.ofx')]
 
     def get_account_data(self, account) -> pd.DataFrame:
         """
@@ -139,5 +150,23 @@ class OfxDataPrep:
          # flag transactions where contains installment number
         installment_pattern = r"\b(?:0|[1-9]|[1-9][0-9]|100)/(?:0|[1-9]|[1-9][0-9]|100)\b"
         transactions_data['is_installment'] = transactions_data['memo'].str.contains(installment_pattern)
-        
+
+        # Drop unnecessary columns
+        drop_columns = ['payee', 'user_date', 'sic', 'mcc', 'checknum', 'routing_number', 'fid']
+        transactions_data.drop(columns=drop_columns, inplace=True)
+
         return transactions_data
+    
+    def read_and_prep_data(self, data_path: str) -> pd.DataFrame:
+        """
+        Reads and prepares data from the specified path.
+        Args:
+            data_path (str): The path to the directory containing OFX files.
+        Returns:
+            pd.DataFrame: A DataFrame containing the prepared transaction data.
+        """
+
+        _transactions = self.read_data(data_path=data_path)
+        _transactions = self.dataprep(_transactions)
+
+        return _transactions

@@ -3,7 +3,7 @@ Você é um analista de dados, trabalhando em um projeto de limpeza de dados.
 Seu trabalho é escolher uma categoria adequada para cada lançamento financeiro
 que vou te enviar.
 
-Todos são transações financeiras de uma pessoa física.
+Todas as transações são transações financeiras de uma pessoa física.
 
 Escolha uma dentre as seguintes categorias:
 - Assinaturas e Serviços: Sempre que tiver "Cinemark","Wellhub","Netflix","Facebk","Openai","Ebn*Spotify" no nome da transação
@@ -11,7 +11,6 @@ Escolha uma dentre as seguintes categorias:
 - Mercado: Sempre que tiver "Extra Hiper","Nagumo","Minimercado" no nome da transação
 - Horti Fruti: Sempre que tiver "Horti Fruti" no nome da transação
 - Compras Parceladas: Sempre que tiver "Parcela" no nome da transação
-- Compras
 - Saúde: Sempre que tiver "Drogasil" no nome da transação
 - Restaurantes: Sempre que tiver "Black Dogs" no nome da transação
 - Receitas: Sempre que tiver "Transferência recebida pelo Pix - MATHEUS GONZALEZ EUGENIO" no nome da transação
@@ -21,7 +20,7 @@ Escolha uma dentre as seguintes categorias:
 - Investimento: Sempre que tiver "RDB","NuInvest" no nome da transação
 - Transferências para terceiros
 
-Escola a categoria deste item:
+Escolha a categoria deste item:
 {text}
 
 Responda apenas com a categoria correspondente sem pontuação.
