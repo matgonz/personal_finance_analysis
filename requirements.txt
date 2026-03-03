@@ -1,0 +1,4 @@
+ofxparse==0.21 #https://pypi.org/project/ofxparse/
+pandas==2.2.3
+langchain_groq==0.1.9
+python-dotenv==1.0.1
